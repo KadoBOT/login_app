@@ -19,14 +19,25 @@ class App extends React.Component {
     password: '',
     emailMsg: '',
     passMsg: '',
+    forbiddenPass: '',
     validPass: false,
     validEmail: false
+  }
+
+  componentDidMount = () => {
+    this.serverRequest = $.get(this.props.source, (item) => {
+      this.setState({forbiddenPass: item.password});
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.serverRequest.abort();
   }
 
   emailChange = (e) => {
     let emailCheck = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(emailCheck.test(e.target.value)){
-      this.setState({validEmail: true})
+      this.setState({emailMsg: '', validEmail: true})
     } else {
       this.setState({validEmail: false});
     }
@@ -35,7 +46,7 @@ class App extends React.Component {
 
   passChange = (e) => {
     if(e.target.value.length >= 8){
-      this.setState({validPass: true});
+      this.setState({passMsg: '', validPass: true});
     } else {
       this.setState({validPass: false});
     }
@@ -45,21 +56,21 @@ class App extends React.Component {
   handleSubmit = () => {
     let emailCheck = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(emailCheck.test(this.state.email) && this.state.password.length >= 8 ){
-      if( this.state.password !== 'password'){
+      if( this.state.password !== this.state.forbiddenPass){
         return this.setState({logged: true, message: 'Logged!'});
       }
-      else if ( this.state.password.length < 8 ){
-        return this.setState({passMsg: 'Password should have 8 or more characters!'});
-      }
       else {
-        return this.setState({passMsg: 'Password incorrect!'});
+        return this.setState({emailMsg: '', passMsg: 'Password incorrect!'});
       }
     }
     else if(emailCheck.test(this.state.email) == false){
       if(this.state.password.length < 8 ){
         return this.setState({emailMsg: 'Enter a valid Email!', passMsg: 'Password should have 8 or more characters!'});
       }
-      return this.setState({emailMsg: 'Enter a valid Email!'});
+      return this.setState({emailMsg: 'Enter a valid Email!', passMsg: ''});
+    }
+    else {
+      return this.setState({emailMsg: '', passMsg: 'Password should have 8 or more characters!'});
     }
   }
 

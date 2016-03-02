@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prod": "webpack-dev-server -d -p",
+    "dev": "webpack-dev-server --progress --colors"
   },
   "jest": {
     "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2",

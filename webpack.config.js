@@ -12,6 +12,13 @@ module.exports = {
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true
   },
+  plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+          compress: {
+              warnings: false
+          }
+      })
+    ],
   module: {
     loaders: [
       {

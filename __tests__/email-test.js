@@ -12,9 +12,11 @@ describe('App', () => {
         <AppComponent />
       );
       let email = App.refs.email
+      
       email.value = 'foo';
       TestUtils.Simulate.change(email);
       expect(App.state.validEmail).toBeFalsy();
+
       email.value = 'test@test.com';
       TestUtils.Simulate.change(email);
       expect(App.state.validEmail).toBeTruthy();

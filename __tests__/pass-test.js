@@ -12,10 +12,12 @@ describe('App', () => {
         <AppComponent />
       );
       let password = App.refs.password
+
       password.value = 'foo';
       TestUtils.Simulate.change(password);
       expect(App.state.password.length).toBeLessThan(8);
       expect(App.state.validPass).toBeFalsy();
+      
       password.value = '12345678';
       TestUtils.Simulate.change(password);
       expect(App.state.password.length).toBeGreaterThan(7);
