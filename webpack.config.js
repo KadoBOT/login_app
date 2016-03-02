@@ -7,6 +7,11 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
   },
   output: { path: __dirname, filename: 'bundle.js' },
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  },
   module: {
     loaders: [
       {
