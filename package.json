@@ -25,12 +25,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jest-cli": "^0.8.2",
+    "jquery": "^2.2.1",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7"
   },
   "devDependencies": {
+    "jest-cli": "^0.8.2",
     "babel-core": "^6.6.0",
     "babel-jest": "^6.0.1",
     "babel-loader": "^6.2.4",
