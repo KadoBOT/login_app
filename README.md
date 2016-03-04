@@ -1,9 +1,4 @@
 # login_app
-git clone this repo  
-npm install 
-  
-npm run dev (run development environment)  
-npm run prod (run production environment)  
-npm test (run tests)  
+Obs: Don't open index.html locally, otherwise it won't work, instead simulate a webserver. Ex.: npm install -g http-server or webpack-dev-server  
 
-Both Development and Production environment can be accessed from http://localhost:8080
+To test, type npm test  
